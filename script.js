@@ -18,6 +18,11 @@ const handleInput = () => {
 textareaEl.addEventListener("input", handleInput);
 
 // -- FORM COMPONENT -- //
+const autoToggleClassName = (targetEl, className, duration) => {
+  targetEl.classList.add(className);
+
+  setTimeout(() => targetEl.classList.remove(className), duration);
+};
 
 const handleSubmit = (e) => {
   e.preventDefault();
@@ -28,13 +33,9 @@ const handleSubmit = (e) => {
   const hashtag = text.split(" ").find((word) => word.startsWith("#"));
 
   if (hashtag && text.length >= 5) {
-    formEl.classList.add("form--valid");
-
-    setTimeout(() => formEl.classList.remove("form--valid"), 2000);
+    autoToggleClassName(formEl, "form--valid", 2000);
   } else {
-    formEl.classList.add("form--invalid");
-
-    setTimeout(() => formEl.classList.remove("form--invalid"), 2000);
+    autoToggleClassName(formEl, "form--invalid", 2000);
 
     textareaEl.focus();
 
